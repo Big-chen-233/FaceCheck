@@ -1,22 +1,25 @@
 package xyz.chen.backend.controller;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import xyz.chen.backend.imageProcess.FaceRecAction;
+import xyz.chen.backend.imageProcess.IFaceRecAction;
 
 @Controller
 public class ImageController {
-    private FaceRecAction faceRecAction;
+    @Autowired
+    private IFaceRecAction faceRecAction;
 
     @CrossOrigin
     @PostMapping(value = "api/update")
     @ResponseBody
-    public String recAction( MultipartFile multipartFile){
-        int score = faceRecAction.getScoreByImageResult(multipartFile);
-        return String.valueOf(score);
+    public String recAction(String imgBase64){
+        int score = faceRecAction.getScoreByImageResult(imgBase64);
+
+        String str_score = String.valueOf(score);
+        return str_score;
     }
 }

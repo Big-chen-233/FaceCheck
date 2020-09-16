@@ -7,7 +7,7 @@
         现在，您不需要千里迢迢地赶往广东，只需在我们鉴定系统上上传您的照片，
         经过数秒的鉴定，就能听到一句亲切的靓仔。</div>
 
-      <nuxt-link to="/checkpage"><button class="button">进入系统</button></nuxt-link> 
+      <nuxt-link to="/checkpage"><button class="indexbutton">进入系统</button></nuxt-link> 
       
         
     
@@ -47,7 +47,7 @@ export default {}
   overflow: hidden;
 }
 
-.button{
+.indexbutton{
   margin-top: 2vh;
   width: 70vw;
   max-width: 19rem;
@@ -60,6 +60,7 @@ export default {}
   line-height: 28px;
   color:white;
   letter-spacing:5px;
+  border:0;
 }
 
 

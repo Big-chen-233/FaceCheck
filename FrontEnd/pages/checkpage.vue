@@ -1,5 +1,9 @@
 <template>
   <div class="container">
+    <div class="welcome">欢迎来到靓仔鉴定系统</div>
+    <div class="notice">在这里，你可以选择上传一张照片</div>
+    <div class="notice" style="margin-top:0.5vh">然后点击按钮进行PK</div>
+
     <el-upload
       class="el"
       action=""
@@ -15,7 +19,10 @@
       
     </el-upload>
 
-    <button @click="submit" class="button"></button>
+    <div class="warning">注意：只能上传jpg和png格式</div>
+    <div class="warning" style="margin-top:0.5vh">且照片大小不得超过5MB</div>
+
+    <button @click="submit" class="checkbutton">进行颜值PK!</button>
     
     
     
@@ -63,15 +70,19 @@
         let data = {
             'data64base':data64base,
         }
-        axios({
-          method:'post',
-          url:'http://localhost:8000/api/update',
-          data: Qs.stringify(data),
-        }).then(res =>{
-          this.score = res.data.str_score;
-        }).catch((err) =>{
+        if(data64base == null || data64base == ''){
+          this.$message.error('请先上传图片再进行PK!');
+        }else{
+          axios({
+            method:'post',
+            url:'http://localhost:8080/api/update',
+            data: Qs.stringify(data),
+          }).then(res =>{
+            this.score = res.data.str_score;
+          }).catch((err) =>{
           
-        })
+          })
+        }
       },
 
     
@@ -94,14 +105,39 @@
 }
 
 .el{
-  margin-top: 15vh;
+  margin-top: 3vh;
 }
-.title {
-  font-size: 2rem;
+.welcome {
+  margin-top: 5vh;
+  font-size:1.7rem;
 }
 
-.button{
+.notice{
+  /* width: 80vw; */
+  margin-top: 5vh;
+}
 
+.warning{
+  margin-top: 3vh;
+  /* width:80vw; */
+  color:red;
+}
+
+
+
+.checkbutton{
+  width: 60vw;
+  max-width: 16rem;
+  min-width: 13rem;
+  background-color: #FF0000;
+  color: white;
+  font-size: 1.2rem;
+  outline: none;
+  border-radius: 15px;
+  height:3.2rem;
+  line-height: 28px;
+  margin-top: 5vh;
+  border:0;
 }
 
 .footer{

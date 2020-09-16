@@ -10,10 +10,11 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.apache.tomcat.util.codec.binary.Base64;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.stereotype.Repository;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -23,30 +24,18 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class FaceRecAction {
+@Repository("faceRecAction")
+public class FaceRecAction implements IFaceRecAction{
     private static final String upload_picBase64_api = "http://kan.msxiaobing.com/APi/Image/UploadBase64";
     private static final String ice_api = "http://kan.msxiaobing.com/Api/ImageAnalyze/Process?service=yanzhi";
     private static final String ice_page = "http://kan.msxiaobing.com/ImageGame/Portal?task=yanzhi";
 
-    public int getScoreByImageResult(MultipartFile file){
-        String imgBase64 = getPicBase64(file);
+    public int getScoreByImageResult(String imgBase64){
         String jsonResult = getUpload_picBase64(imgBase64);
         String analyzeResult = analyzeImage(jsonResult);
         return getScore(analyzeResult);
     }
 
-
-    private String getPicBase64(MultipartFile file){
-        byte[] data =null;
-        try{
-            BufferedInputStream in = new BufferedInputStream(file.getInputStream());
-            in.read(data);
-            in.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return Base64.encodeBase64String(data);
-    }
 
     private String getUpload_picBase64(String imgBase64){
         StringBuilder sb=new StringBuilder();
@@ -120,7 +109,7 @@ public class FaceRecAction {
         Matcher m = pattern.matcher(jsonResult);
         if (m.find()) {
             System.out.println("analyzeResult=" + m.group());
-            double temp = Double.valueOf(m.group());
+            double temp = Double.parseDouble(m.group());
             int score = (int) (temp * 10);
             return score;
         } else {

@@ -1,5 +1,4 @@
-package xyz.chen.backend.imageProcess;
-
+package xyz.chen.backend.service.impl;
 
 import net.sf.json.JSONObject;
 import org.apache.http.HttpResponse;
@@ -10,11 +9,13 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.springframework.stereotype.Repository;
+import org.apache.tomcat.util.codec.binary.Base64;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import xyz.chen.backend.result.Result;
+import xyz.chen.backend.service.IAnalyseImageService;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -24,21 +25,31 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@Repository("faceRecAction")
-public class FaceRecAction implements IFaceRecAction{
+/**
+ * Created by weihuaxiao
+ * on 2017/9/22.
+ */
+@Service
+public class AnalyseImageServiceImpl implements IAnalyseImageService {
+
     private static final String upload_picBase64_api = "http://kan.msxiaobing.com/APi/Image/UploadBase64";
-    private static final String ice_api = "http://kan.msxiaobing.com/Api/ImageAnalyze/Process?service=yanzhi";
+    private static final String ice_api = "http://kan.msxiaobing.com/Api/ImageAnalyze/Process?service=yanzhi&tid=8b9a88049f9c4f26b4da60afc9d70ef4";
     private static final String ice_page = "http://kan.msxiaobing.com/ImageGame/Portal?task=yanzhi";
 
-    public int getScoreByImageResult(String imgBase64){
-        String jsonResult = getUpload_picBase64(imgBase64);
-        String analyzeResult = analyzeImage(jsonResult);
-        return getScore(analyzeResult);
+    @Override
+    public Result getScoreByImageResult(String img64) {
+        //读取文件图片为base64编码格
+        //base64上传到微软服务器
+        String jsonResultPic = getUploadPicResult(img64);
+
+        String analyzeResult = analyzeImage(jsonResultPic);
+        int faceAuthScore = findScoreFromString(analyzeResult);
+        String comment = getComment(analyzeResult);
+        return new Result(faceAuthScore,comment);
     }
 
-
-    private String getUpload_picBase64(String imgBase64){
-        StringBuilder sb=new StringBuilder();
+    private String getUploadPicResult(String imgdataBase64) {
+        StringBuffer sb=new StringBuffer();
         try {
             URL realUrl = new URL(upload_picBase64_api);
             HttpURLConnection conn = (HttpURLConnection) realUrl.openConnection();
@@ -52,11 +63,11 @@ public class FaceRecAction implements IFaceRecAction{
             conn.setRequestProperty("Connection", "Keep-Alive");// 维持长连接
 
             DataOutputStream dataOutputStream = new DataOutputStream(conn.getOutputStream());
-            dataOutputStream.writeBytes(imgBase64);
+            dataOutputStream.writeBytes(imgdataBase64);
             dataOutputStream.flush();
             dataOutputStream.close();
 
-            String readLine;
+            String readLine=new String();
             BufferedReader responseReader=new BufferedReader(new InputStreamReader(conn.getInputStream(),"UTF-8"));
             while((readLine=responseReader.readLine())!=null){
                 sb.append(readLine).append("\n");
@@ -66,22 +77,22 @@ public class FaceRecAction implements IFaceRecAction{
 
         } catch (Exception e) {
             e.printStackTrace();
-        }
+         }
         finally {
             return sb.toString();
         }
     }
 
-    public String analyzeImage(String jsonResult){
+    public String analyzeImage(String jsonResultPic) {
         DefaultHttpClient httpClient=new DefaultHttpClient();
         DefaultHttpClient httpClient2=new DefaultHttpClient();
         HttpPost httpPost1=new HttpPost(ice_api);
         HttpPost httpPost2=new HttpPost(ice_page);
 
-        JSONObject jasonObject = JSONObject.fromObject(jsonResult);
+        JSONObject jasonObject = JSONObject.fromObject(jsonResultPic);
         Map<String,String> contentImgUrl = (Map)jasonObject;
         String imgUrl = contentImgUrl.get("Host") + contentImgUrl.get("Url");
-        System.out.print(jsonResult);
+        System.out.print(jsonResultPic);
         List<NameValuePair> form=new ArrayList<NameValuePair>();
 
         form.add(new BasicNameValuePair("MsgId",String.valueOf(System.currentTimeMillis())+"063"));
@@ -104,18 +115,31 @@ public class FaceRecAction implements IFaceRecAction{
         return null;
 
     }
-    public int getScore(String jsonResult){
+    public int findScoreFromString(String jsonResultPic) {
         Pattern pattern = Pattern.compile("\\d+[.]\\d+");
-        Matcher m = pattern.matcher(jsonResult);
+        Matcher m = pattern.matcher(jsonResultPic);
         if (m.find()) {
             System.out.println("analyzeResult=" + m.group());
-            double temp = Double.parseDouble(m.group());
-            int score = (int) (temp * 10);
+            double temp = Double.valueOf(m.group());
+            int score = (int)(temp*10);
             return score;
-        } else {
+        }else{
             return 0;
         }
-
     }
+
+    private String getComment(String jsonResultPic){
+        JSONObject jasonObject = JSONObject.fromObject(jsonResultPic);
+        Map<String,String> result = (Map)jasonObject;
+        return "test";
+    }
+
+
+
+
+
+
+
+
 
 }

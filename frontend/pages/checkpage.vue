@@ -23,7 +23,7 @@
     </el-upload>
 
     <div class="warning">注意：只能上传jpg和png格式</div>
-    <div class="warning" style="margin-top:0.5vh">且照片大小不得超过5MB</div>
+    <div class="warning" style="margin-top:0.5vh">且照片大小不得超过2MB</div>
 
     <button @click="submit" class="checkbutton">进行颜值PK!</button>
     
@@ -53,14 +53,14 @@
     methods: {
       onUploadChange(file){
         const isImage = (file.raw.type === 'image/jpeg' || file.raw.type === 'image/png');   //数据格式
-        const isLimited5M = file.size / 1024 / 1024 < 5;                        //数据大小
+        const isLimited2M = file.size / 1024 / 1024 < 2;                        //数据大小
 
         if(!isImage){
           this.$message.error('仅支持上传图片格式!');
           return false;
         }
-        if(!isLimited5M){
-          this.$message.error('上传图片不得大于5MB!');
+        if(!isLimited2M){
+          this.$message.error('上传图片不得大于2MB!');
         }
 
         var reader = new FileReader();
@@ -135,12 +135,14 @@
 .notice{
   /* width: 80vw; */
   margin-top: 5vh;
+  text-align: center;
 }
 
 .warning{
   margin-top: 3vh;
   /* width:80vw; */
   color:red;
+  text-align: center;
 }
 
 

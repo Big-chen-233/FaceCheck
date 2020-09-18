@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     data(){
       return{
@@ -58,6 +59,7 @@ export default {
         let data = {
           'beauty':this.score,
         }
+
         axios({
           method:'post',
           url:'http://localhost:8080/api/getlist',
@@ -68,6 +70,8 @@ export default {
               ...item,
             }
           })
+        }).catch((err) =>{
+          this.$message.error('请求失败');
         })
       }
     }

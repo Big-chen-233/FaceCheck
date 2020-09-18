@@ -58,7 +58,7 @@ public class Facedect {
             JSONArray faceList = res.getJSONObject("result").getJSONArray("face_list");
             JSONObject jsonObject = faceList.getJSONObject(0);
             Integer age = jsonObject.getInt("age");
-            Double beauty = 10*Math.sqrt(jsonObject.getDouble("beauty"));
+            Double beauty = jsonObject.getDouble("beauty");
             System.out.println("Beauty:"+beauty);
             String expression = jsonObject.getJSONObject("expression").getString("type");
             String face_shape = jsonObject.getJSONObject("face_shape").getString("type");

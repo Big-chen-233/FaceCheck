@@ -16,7 +16,7 @@ public class UserService {
         userDao.save(user);
     }
 
-    public List<User> getList(Double beauty){
-       return userDao.findByBeautyBetween(beauty-5,beauty+5);
+    public List<User> getList(){
+       return userDao.findAll();
     }
 }

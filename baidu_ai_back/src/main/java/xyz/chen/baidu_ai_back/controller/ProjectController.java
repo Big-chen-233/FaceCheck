@@ -38,7 +38,7 @@ public class ProjectController {
     @RequestMapping(value = "/getlist",method = RequestMethod.POST)
     @ResponseBody
     public List<User> getList(@RequestBody Double beauty) {
-        return userService.getList(beauty);
+        return userService.getList();
 
     }
 }

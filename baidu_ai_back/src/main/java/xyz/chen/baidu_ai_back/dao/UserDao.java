@@ -6,5 +6,5 @@ import xyz.chen.baidu_ai_back.pojo.User;
 import java.util.List;
 
 public interface UserDao extends JpaRepository<User,Integer> {
-    List<User> findByBeautyBetween(double start,double end);
+    List<User> findAll();
 }

@@ -1,5 +1,5 @@
 <template>
-<div class="container">
+<div class="container" ref="box">
 
   <div class="fstbox">
       <div class="row">
@@ -16,8 +16,13 @@
   </div>
 
 
-  <div class="rank">排行榜</div>
-  <div class="secbox">456
+  <div class="rank">Particulir Card</div>
+  <div class="secbox">
+        {{expression}}
+        {{emotion}}
+        {{face_shape}}
+        {{glasses}}
+        {{gender}}
 
   </div>
 
@@ -38,6 +43,12 @@ export default {
         score:'0',
         img:'',
         evaluate:'恭喜你，你是一个名副其实的靓仔！',
+
+        expression:'',
+        emotion:'',
+        face_shape:'',
+        glasses:'',
+        gender:'',
         user:[],
       }
     },
@@ -46,33 +57,36 @@ export default {
     },
     methods:{
       itit(){
+        let windowH = window.screen.height;
+        this.$refs.box.style.height = windowH + 'px';
+        console.log(windowH);
+
         this.name = localStorage.getItem('name');
         if(name == '' || name == null)
           name = '你未输入昵称'
         this.score = localStorage.getItem('score');
+
+
         this.img = localStorage.getItem('mypic');
         if(this.score >= 60){
           this.evaluate = '恭喜你，你是一只名副其实的靓仔!';}
         else{
           this.evaluate = '差一点点就可以成为靓仔，加油!'}
 
-        let data = {
-          'beauty':this.score,
-        }
+        this.expression = localStorage.getItem('expression');
+          this.expression = '你充满了' + this.expression;
 
-        axios({
-          method:'post',
-          url:'http://localhost:8080/api/getlist',
-          data:data,
-        }).then(res => {
-          this.user = res.data.map(item => {
-            return{
-              ...item,
-            }
-          })
-        }).catch((err) =>{
-          this.$message.error('请求失败');
-        })
+        this.emotion = localStorage.getItem('emotion');
+          this.emotion = '你看起来很' + this.emotion;
+
+        this.gender = localStorage.getItem('gender');
+
+        this.glasses = localStorage.getItem('glasses');
+          this.glasses = (this.glasses == false)?('你没戴眼镜，看起来视力保护得很好'):(this.gender == true)?('你的眼镜真帅气!'):('你的眼镜真漂亮!');
+
+
+
+
       }
     }
 }
@@ -156,6 +170,8 @@ export default {
   width: 80vw;
   border:solid 1px;
   margin-top: -1.5rem;
+  padding-top: 1.5rem;
+  text-align: center;
 }
 
 .img{

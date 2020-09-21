@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" ref="container">
     <div class="welcome">欢迎来到靓仔鉴定系统</div>
     <div class="notice">在这里，你可以选择上传一张照片</div>
     <div class="notice" style="margin-top:0.5vh">输入对应的昵称</div>
@@ -46,6 +46,11 @@
         judge:false,
         imageList:[],
         name:'',
+        expression:'',
+        emotion:'',
+        face_shape:'',
+        glasses:'',
+        gender:'',
       };
     },
     computed:{
@@ -53,7 +58,16 @@
         return this.judge;
       },
     },
+    mounted(){
+      this.init();
+    },
     methods: {
+      init(){
+        let windowH = window.screen.height;
+        this.$refs.container.style.height = windowH + 'px';
+        console.log(windowH);
+      },
+
       onUploadChange(file){
         const isImage = (file.raw.type === 'image/jpeg' || file.raw.type === 'image/png');   //数据格式
         const isLimited2M = file.size / 1024 / 1024 < 2;                        //数据大小
@@ -104,6 +118,12 @@
             data:data,
           }).then(res =>{
             this.score = res.data.beauty;
+            this.expression = res.data.expression;
+            this.emotion = res.data.emotion;
+            this.face_shape = res.data.face_shape;
+            this.glasses = res.data.glasses;
+            this.gender = res.data.gender;
+
             sessionStorage.removeItem('data64');                   //清空sessionStorage
             this.imageList = []; //请求成功后移除图片
             this.judge = false; //移除图片后添加边框出现
@@ -111,6 +131,12 @@
             localStorage.setItem('mypic',data64base);
             localStorage.setItem('score',this.score);
             localStorage.setItem('name',this.name);
+            localStorage.setItem('expression',this.expression);
+            localStorage.setItem('emotion',this.emotion);
+            localStorage.setItem('face_shape',this.face_shape);
+            localStorage.setItem('glasses',this.glasses);
+            localStorage.setItem('gender',this.gender);
+
           }).catch((err) =>{
             this.$message.error('连接失败');
           })
@@ -180,6 +206,7 @@
   line-height: 28px;
   margin-top: 5vh;
   border:0;
+  box-shadow: 0 !important;
 }
 
 .footer{

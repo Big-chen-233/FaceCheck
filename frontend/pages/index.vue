@@ -1,5 +1,5 @@
 <template>
-<div class="container">
+<div class="container" ref="box">
 
   <div class="hidedescription" ref="myNotice">很多人去广东就是为了听别人叫自己一句靓仔，
         现在，您不需要千里迢迢地赶往广东，只需在我们鉴定系统上上传您的照片，
@@ -41,10 +41,14 @@ export default {
     }
   },
   mounted(){
-
+    this.init();
   },
   methods:{
-
+      init(){
+        let windowH = document.body.offsetHeight;
+        this.$refs.box.style.height = windowH + 'px';
+        console.log(windowH);
+      },
     comeout(){
 
       if(this.judge == false){

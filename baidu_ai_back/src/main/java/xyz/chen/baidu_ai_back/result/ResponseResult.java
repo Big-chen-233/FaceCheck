@@ -26,12 +26,4 @@ public class ResponseResult {
     public void setUser(User user) {
         this.user = user;
     }
-
-    @Override
-    public String toString() {
-        return "ResponseResult{" +
-                "code=" + code +
-                ", user=" + user +
-                '}';
-    }
 }

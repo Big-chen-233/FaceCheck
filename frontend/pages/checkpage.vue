@@ -116,12 +116,12 @@
             url:'http://localhost:8080/api/update',
             data:data,
           }).then(res =>{
-            this.score = res.data.beauty;
-            this.expression = res.data.expression;
-            this.emotion = res.data.emotion;
-            this.face_shape = res.data.face_shape;
-            this.glasses = res.data.glasses;
-            this.gender = res.data.gender;
+            this.score = res.data.user.beauty;
+            this.expression = res.data.user.expression;
+            this.emotion = res.data.user.emotion;
+            this.face_shape = res.data.user.face_shape;
+            this.glasses = res.data.user.glasses;
+            this.gender = res.data.user.gender;
 
             sessionStorage.removeItem('data64');                   //清空sessionStorage
             this.imageList = []; //请求成功后移除图片

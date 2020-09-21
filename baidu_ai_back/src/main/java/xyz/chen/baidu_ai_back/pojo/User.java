@@ -88,4 +88,21 @@ public class User implements IUser{
         return face_type;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "nickname='" + nickname + '\'' +
+                ", age=" + age +
+                ", beauty=" + beauty +
+                ", expression='" + expression + '\'' +
+                ", face_shape='" + face_shape + '\'' +
+                ", gender='" + gender + '\'' +
+                ", race='" + race + '\'' +
+                ", eye_status=" + eye_status +
+                ", face_probability=" + face_probability +
+                ", glasses='" + glasses + '\'' +
+                ", emotion='" + emotion + '\'' +
+                ", face_type='" + face_type + '\'' +
+                '}';
+    }
 }

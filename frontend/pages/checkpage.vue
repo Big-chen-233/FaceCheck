@@ -26,7 +26,7 @@
     <input type="text" class="input" v-model="name" placeholder="请输入昵称">
     <div class="warning">注意：只能上传jpg和png格式</div>
     <div class="warning" style="margin-top:0.5vh">且照片大小不得超过2MB</div>
-    <div class="warning" style="margin-top:0.5vh">你可以不输入昵称但这样不会进入排行榜</div>
+    <div class="warning" style="margin-top:0.5vh">你可以不输入昵称但这看起来不太好</div>
 
     <button @click="submit" class="checkbutton">进行颜值PK!</button>
 
@@ -106,7 +106,6 @@
         let data64base = this.database64;
         console.log(data64base);
         let data = {
-            'name':this.name,
             'data64base':data64base,
         }
         if(data64base == null || data64base == ''){   //无图片直接点击PK处理

@@ -62,8 +62,8 @@ export default {
         console.log(windowH);
 
         this.name = localStorage.getItem('name');
-        if(name == '' || name == null)
-          name = '你未输入昵称'
+        if(this.name == '' || this.name == null)
+          this.name = '你未输入昵称'
         this.score = localStorage.getItem('score');
 
 

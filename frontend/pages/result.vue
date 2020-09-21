@@ -46,7 +46,6 @@ export default {
 
         expression:'',
         emotion:'',
-        face_shape:'',
         glasses:'',
         gender:'',
         user:[],

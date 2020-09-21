@@ -48,7 +48,6 @@
         name:'',
         expression:'',
         emotion:'',
-        face_shape:'',
         glasses:'',
         gender:'',
       };
@@ -116,12 +115,21 @@
             url:'http://localhost:8080/api/update',
             data:data,
           }).then(res =>{
-            this.score = res.data.beauty;
-            this.expression = res.data.expression;
-            this.emotion = res.data.emotion;
-            this.face_shape = res.data.face_shape;
-            this.glasses = res.data.glasses;
-            this.gender = res.data.gender;
+            this.score = res.data.user.beauty;
+            this.expression = res.data.user.expression;
+            this.emotion = res.data.user.emotion;
+            this.glasses = res.data.user.glasses;
+            this.gender = res.data.user.gender;
+
+            // console.log(this.score);
+            // console.log(res.data.expression);
+            // console.log(this.emotion);
+            // console.log(res.data.face_shape);
+            // console.log(this.glasses);
+            // console.log(res.data.gender);
+
+
+
 
             sessionStorage.removeItem('data64');                   //清空sessionStorage
             this.imageList = []; //请求成功后移除图片

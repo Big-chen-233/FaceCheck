@@ -3,7 +3,8 @@
 
   <div class="fstbox">
       <div class="row">
-        <img class="img"
+        <img
+        :class="isH ? 'himg' : 'vimg'"
         :src="img"
         ref="img">
         <div style="width:7vw"></div>
@@ -24,11 +25,9 @@
     <div class="chara2" >{{expression}}</div>
     <div class="chara">{{emotion}}</div>
     <div class="chara">#{{suggest}}</div>
-
-
-
-
   </div>
+
+  <nuxt-link to="/rankpage"><button class="rankbutton">点击查看排行榜</button></nuxt-link>
 
 
 
@@ -47,7 +46,7 @@ export default {
         score:'0',
         img:'',
         evaluate:'恭喜你，你是一个名副其实的靓仔！',
-
+        isH:false,
         expression:'',
         emotion:'',
         eye_status:'',
@@ -118,25 +117,11 @@ export default {
 
       },
 
-      base64ImgtoFile(dataurl, filename = 'file') {
-        let arr = dataurl.split(',')
-        let mime = arr[0].match(/:(.*?);/)[1]
-        let suffix = mime.split('/')[1]
-        let bstr = atob(arr[1])
-        let n = bstr.length
-        let u8arr = new Uint8Array(n)
-        while (n--) {
-          u8arr[n] = bstr.charCodeAt(n)
-        }
-        return new File([u8arr], `${filename}.${suffix}`, {
-          type: mime
-        })
-      },
-
       change(){
-        this.imgFile = this.base64ImgtoFile(this.img);
-        this.$refs.img.style = `backgroundPosition: center;backgroundSize: cover;backgroundRepeat: no-repeat;backgroundImage: url(${this.imgFile});`
-        console.log(this.imgFile);
+        if (this.$refs.img.height > this.$refs.img.width)
+          this.isH = true;
+        else
+          this.isH = false;
       }
     }
 }
@@ -156,7 +141,7 @@ export default {
 }
 
 .fstbox{
-  margin-top: 5vh;
+  margin-top: 6vh;
   width: 92vw;
   /* border:solid 1px; */
   background: #68e8ff;
@@ -186,10 +171,10 @@ export default {
 .retscore{
   margin-top: -1vh;
   text-align: center;
-  font-size: 4rem;
+  font-size: 3.5rem;
   color:#FF0033;
   /* border:solid 1px; */
-  line-height: 4.5rem;
+  line-height: 4rem;
 }
 
 .retevaluate{
@@ -224,10 +209,17 @@ export default {
   text-align: center;
 }
 
-.img{
+.vimg{
   border-radius: 50%;
-  width: 5rem;
+  width: 90px;
   height:auto;
+  background-color: white;
+}
+
+.himg{
+  border-radius: 50%;
+  width: auto;
+  height:90px;
   background-color: white;
 }
 
@@ -258,6 +250,18 @@ export default {
   color: #A6A6A6;
   text-align: center;
 }
+
+.rankbutton{
+  width: 55vw;
+  border-radius: 10px;
+  border:0;
+  outline: 0;
+  margin-top: 3vh;
+  height: 2.7rem;
+  font-size: 1.2rem;
+  background:#6495ED;
+}
+
 @media screen and (max-width: 300px){
   .retevaluate{
     font-size: 1rem;

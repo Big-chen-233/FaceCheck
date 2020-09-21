@@ -103,8 +103,8 @@
         let data64base = this.database64;
         // console.log(data64base);
         let data = {
+            'nickname':this.name,
             'data64base':data64base,
-            'name':this.name,
         }
         if(data64base == null || data64base == ''){   //无图片直接点击PK处理
           this.$message.error('请先上传图片再进行PK!');

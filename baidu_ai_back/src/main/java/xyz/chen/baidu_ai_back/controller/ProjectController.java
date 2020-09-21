@@ -21,8 +21,10 @@ public class ProjectController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     @ResponseBody
     public ResponseResult recievePic(@RequestBody String imgRecv){
-        String imgBase64 = imgRecv.split(";base64,")[1].replaceAll("[\\{\\}\\[\\]\"]", "");
-        String nickname = imgRecv.split(";base64,")[0].replaceAll("[\\{\\}\\[\\]\"]", "");
+        String[] data = imgRecv.split(";base64,");
+        String imgBase64 = data[1].replaceAll("[\\{\\}\\[\\]\"]", "");
+        String nickname = data[0].split(",\"data64base\":data:")[0];
+        nickname = nickname.replaceAll("\"nickname:\"","");
         IUser user = new Facedect().getInfoFromImg(imgBase64);
         EasyUser easyUser = new EasyUser();
         if(user == null){

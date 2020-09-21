@@ -18,11 +18,17 @@
 
   <div class="rank">Particulir Card</div>
   <div class="secbox">
+    <div>你充满了{{expression}}</div>
+    <div>看起来很{{emotion}}</div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+
         {{expression}}
         {{emotion}}
-        {{face_shape}}
         {{glasses}}
-        {{gender}}
+
 
   </div>
 
@@ -63,7 +69,8 @@ export default {
         this.name = localStorage.getItem('name');
         if(this.name == '' || this.name == null)
           this.name = '你未输入昵称'
-        this.score = localStorage.getItem('score');
+        this.score = parseInt(localStorage.getItem('score'));
+        this.score = Math.round(this.score);
 
 
         this.img = localStorage.getItem('mypic');
@@ -81,7 +88,7 @@ export default {
         this.gender = localStorage.getItem('gender');
 
         this.glasses = localStorage.getItem('glasses');
-          this.glasses = (this.glasses == false)?('你没戴眼镜，看起来视力保护得很好'):(this.gender == true)?('你的眼镜真帅气!'):('你的眼镜真漂亮!');
+          this.glasses = (this.glasses == 'none')?('你没戴眼镜，看起来视力保护得很好'):(this.gender == 'male')?('你的眼镜真帅气!'):('你的眼镜真漂亮!');
 
 
 

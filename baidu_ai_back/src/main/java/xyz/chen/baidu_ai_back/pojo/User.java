@@ -2,19 +2,10 @@ package xyz.chen.baidu_ai_back.pojo;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "user")
-@JsonIgnoreProperties({"handler","hibernateLazyInitializer"})
-
 public class User implements IUser{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
     private String nickname;
     private Integer age;
     private Double beauty;
@@ -27,11 +18,6 @@ public class User implements IUser{
     private String glasses;
     private String emotion;
     private String face_type;
-
-    public User() {
-
-    }
-
 
     public String getNickname() {
         return nickname;
@@ -102,20 +88,4 @@ public class User implements IUser{
         return face_type;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "age=" + age +
-                ", beauty=" + beauty +
-                ", expression='" + expression + '\'' +
-                ", face_shape='" + face_shape + '\'' +
-                ", gender='" + gender + '\'' +
-                ", race='" + race + '\'' +
-                ", eye_status=" + eye_status +
-                ", face_probability=" + face_probability +
-                ", glasses='" + glasses + '\'' +
-                ", emotion='" + emotion + '\'' +
-                ", face_type='" + face_type + '\'' +
-                '}';
-    }
 }

@@ -48,7 +48,6 @@
         name:'',
         expression:'',
         emotion:'',
-        face_shape:'',
         glasses:'',
         gender:'',
       };
@@ -119,9 +118,18 @@
             this.score = res.data.user.beauty;
             this.expression = res.data.user.expression;
             this.emotion = res.data.user.emotion;
-            this.face_shape = res.data.user.face_shape;
             this.glasses = res.data.user.glasses;
             this.gender = res.data.user.gender;
+
+            // console.log(this.score);
+            // console.log(res.data.expression);
+            // console.log(this.emotion);
+            // console.log(res.data.face_shape);
+            // console.log(this.glasses);
+            // console.log(res.data.gender);
+
+
+
 
             sessionStorage.removeItem('data64');                   //清空sessionStorage
             this.imageList = []; //请求成功后移除图片

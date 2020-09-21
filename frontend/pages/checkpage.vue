@@ -48,7 +48,7 @@
         name:'',
         expression:'',
         emotion:'',
-        glasses:'',
+        eye_status:'',
         gender:'',
       };
     },
@@ -82,7 +82,7 @@
         var reader = new FileReader();
         reader.readAsDataURL(file.raw);
         reader.onload = function(e){
-        console.log(this.result);             //图片的base64数据
+        // console.log(this.result);             //图片的base64数据
 
         this.database64 = this.result;
         sessionStorage.setItem('data64',this.database64);   //储存base64数据
@@ -97,15 +97,14 @@
       },
 
       submit(){
-        console.log(this.name);
+
         this.database64 = sessionStorage.getItem('data64');   //读取base64数据
 
-        this.name = '请输入昵称'; //提交时还原数据
-
         let data64base = this.database64;
-        console.log(data64base);
+        // console.log(data64base);
         let data = {
             'data64base':data64base,
+            'name':this.name,
         }
         if(data64base == null || data64base == ''){   //无图片直接点击PK处理
           this.$message.error('请先上传图片再进行PK!');
@@ -118,18 +117,8 @@
             this.score = res.data.user.beauty;
             this.expression = res.data.user.expression;
             this.emotion = res.data.user.emotion;
-            this.glasses = res.data.user.glasses;
+            this.eye_status = res.data.user.eye_status;
             this.gender = res.data.user.gender;
-
-            // console.log(this.score);
-            // console.log(res.data.expression);
-            // console.log(this.emotion);
-            // console.log(res.data.face_shape);
-            // console.log(this.glasses);
-            // console.log(res.data.gender);
-
-
-
 
             sessionStorage.removeItem('data64');                   //清空sessionStorage
             this.imageList = []; //请求成功后移除图片
@@ -138,10 +127,12 @@
             localStorage.setItem('mypic',data64base);
             localStorage.setItem('score',this.score);
             localStorage.setItem('name',this.name);
+            console.log(localStorage.getItem('name'));
+            this.name = ''; //提交成功后还原数据
             localStorage.setItem('expression',this.expression);
             localStorage.setItem('emotion',this.emotion);
             localStorage.setItem('face_shape',this.face_shape);
-            localStorage.setItem('glasses',this.glasses);
+            localStorage.setItem('eye_status',this.eye_status);
             localStorage.setItem('gender',this.gender);
 
           }).catch((err) =>{

@@ -118,10 +118,15 @@ export default {
       },
 
       change(){
+        console.log('我执行了');
         if (this.$refs.img.height > this.$refs.img.width)
           this.isH = true;
         else
           this.isH = false;
+
+        console.log(this.isH);
+        console.log(this.$refs.img.height);
+        console.log(this.$refs.img.width);
       }
     }
 }
@@ -211,7 +216,7 @@ export default {
 
 .vimg{
   border-radius: 50%;
-  width: 90px;
+  width: 70px;
   height:auto;
   background-color: white;
 }
@@ -219,7 +224,7 @@ export default {
 .himg{
   border-radius: 50%;
   width: auto;
-  height:90px;
+  height:70px;
   background-color: white;
 }
 

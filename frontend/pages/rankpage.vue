@@ -1,14 +1,22 @@
 <template>
   <div class="container">
-    <div class="rankhead"> <div class="ranktitle"> 排行榜</div> <img  class="img"  src="@/assets/medal.png" alt="图片加载失败"></div>
-    <div class="ranklist" v-for="(item,index) in users" :key="index" :v-if="index < 10">
-      <div class="everylist">
+    <div class="rankhead"> <div class="ranktitle"> 排行榜</div> <img  class="medalimg"  src="@/assets/medal.png" alt="图片加载失败"></div>
+
+    <div class="with_lineTitle">
+　　  <span class="line"></span>
+　　  <span class="Tbox">你和靓仔的差距有多少?</span>
+　　  <span class="line"></span>
+    </div>
+
+    <div class="ranklist">
+      <div class="everylist" v-for="(item,index) in users" :key="index" :v-if="index < 10">
         <div class="medal1" v-if="index == 0"></div>
         <div class="medal2" v-else-if="index == 1"></div>
         <div class="medal3" v-else-if="index == 2"></div>
-        <div class="medal4" v-else>{{item.index}}</div>
+        <div class="medal4" v-else>{{index + 1}}</div>
         <div class="nickname">{{item.nickname}}</div>
         <div class="rankscore">{{item.beauty}}</div>
+        <div class="star"></div>
       </div>
 
 
@@ -83,6 +91,7 @@ export default {
   justify-content: flex-start;
   align-items: center;
   /* border:solid 1px; */
+  color: #646464;
 }
 
 .ranktitle{
@@ -92,7 +101,27 @@ export default {
   width: 50vw;
 }
 
-.img{
+.with_lineTitle{
+  margin-top: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.with_lineTitle .line{
+  height: 2.5px;
+  background-color:rgb(16, 219, 255);
+  width: 15vw;
+}
+
+.with_lineTitle .Tbox{
+  padding: 0px 10px;
+  width: 52vw;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.medalimg{
   margin-left: 8vw;
   width: 4rem;
   height: 4rem;
@@ -100,45 +129,101 @@ export default {
 }
 
 .ranklist{
-  width:80vw;
+  padding: 5px 5px 5px 5px;
+  /* border:solid 1px; */
+  margin-top: 3vh;
+  width:86vw;
+  /* background: white; */
+  /* border-radius: 10px; */
 }
 
 .everylist{
-  width: 80vw;
+  max-width: 45rem;
+  margin-top: 1vh;
+  width: 83vw;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  height: 4rem;
+  height: 3.3rem;
+  background: white;
+  border-radius: 10px;
+  border:solid 1px;
 }
 
 .medal1{
-  width: 4rem;
-  height: 4rem;
-  background-image: url('@/assets/fitst4.png');
+  margin-left: 2vw;
+  width: 3rem;
+  height: 3rem;
+  background-image: url('../assets/fitst4.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* border: solid 1px; */
 }
 
 .medal2{
-  width: 4rem;
-  height: 4rem;
-  background-image: url('@/assets/second2.png');
+  margin-left: 2vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  background-image: url('../assets/second2.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* border: solid 1px; */
 }
 
 .medal3{
-  width: 4rem;
-  height: 4rem;
-  background-image: url('@/assets/third3.png');
+  margin-left: 2vw;
+  width: 3rem;
+  height: 3rem;
+  background-image: url('../assets/third3.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* border: solid 1px; */
 }
 
 .medal4{
+  margin-left: 2vw;
   font-size: 1.5rem;
+  /* border: solid 1px; */
+  width: 3rem;
+  text-align: center;
+  color: rgb(14, 170, 245);
 }
 
 .nickname{
-  font-size: 1.5rem;
+  margin-left: 3vw;
+  font-size: 1.2rem;
+  /* border: solid 1px; */
+  width: 40vw;
 }
 
 .rankscore{
+  margin-left: 5vw;
   font-size: 1.5rem;
+  /* border: solid 1px; */
+  color:rgb(245, 207, 65)
+}
+
+.star{
+  margin-left: 1vw;
+  width: 2.2rem;
+  height: 2.2rem;
+  background-image: url('../assets/star.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* border:solid 1px; */
+}
+@media screen and (max-width: 300px){
+  .nickname{
+    font-size: 1rem;
+  }
 }
 </style>

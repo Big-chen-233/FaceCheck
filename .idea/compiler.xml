@@ -12,7 +12,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="backend" target="1.8" />
-      <module name="baidu_ai_back" target="1.8" />
+      <module name="baidu_ai_back" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

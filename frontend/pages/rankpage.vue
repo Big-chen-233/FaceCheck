@@ -85,20 +85,25 @@ export default {
 
 .rankhead{
   display: flex;
-  margin-top: 7vh;
+  margin-top: 5vh;
   width:80vw;
   flex-direction: row;
+  height: 18vh;
   justify-content: flex-start;
   align-items: center;
   /* border:solid 1px; */
   color: #646464;
+  /* border: solid 3.5px rgb(84, 185, 253); */
+  border-radius: 10px;
+  background: rgb(200, 244, 247);
+  box-shadow: 6px 6px 6px  rgb(129, 201, 248);
 }
 
 .ranktitle{
   font-size: 1.8rem;
   /* border:solid 1px; */
   text-align: center;
-  width: 50vw;
+  width: 45vw;
 }
 
 .with_lineTitle{
@@ -111,7 +116,7 @@ export default {
 .with_lineTitle .line{
   height: 2.5px;
   background-color:rgb(16, 219, 255);
-  width: 15vw;
+  width: 17vw;
 }
 
 .with_lineTitle .Tbox{
@@ -138,7 +143,6 @@ export default {
 }
 
 .everylist{
-  max-width: 45rem;
   margin-top: 1vh;
   width: 83vw;
   display: flex;
@@ -148,7 +152,7 @@ export default {
   height: 3.3rem;
   background: white;
   border-radius: 10px;
-  border:solid 1px;
+  border:solid 1px gray;
 }
 
 .medal1{
@@ -221,9 +225,42 @@ export default {
   background-repeat: no-repeat;
   /* border:solid 1px; */
 }
+
 @media screen and (max-width: 300px){
   .nickname{
     font-size: 1rem;
+  }
+  .with_lineTitle .line{
+    width:10vw;
+  }
+  .with_lineTitle .Tbox{
+    width:70vw;
+  }
+}
+
+@media screen and (max-width: 320px) and (min-width: 300px){
+  .with_lineTitle .Tbox{
+    width:60vw;
+  }
+}
+
+@media screen and (max-width: 1024px) and (min-width: 800px){
+  .container{
+    width:100vw;
+  }
+}
+
+@media screen and (max-width: 800) and (min-width: 600px){
+  .container{
+    width:100vw;
+    background: black;
+  }
+  .ranklist{
+    widows: 60vw;
+  }
+  .everylist{
+    width: 60vw;
+    border:solid 2px black;
   }
 }
 </style>

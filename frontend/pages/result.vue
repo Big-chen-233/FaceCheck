@@ -207,11 +207,15 @@ export default {
 }
 
 .secbox{
-  width: 80vw;
+  width: 90vw;
   margin-top: 3vh;
   /* border:solid 1px; */
   /* padding-top: 1rem; */
   text-align: center;
+  background: white;
+  border:solid gainsboro 1px;
+  border-radius: 10px;
+  padding:10px 5px 10px 5px;
 }
 
 .vimg{
@@ -265,6 +269,7 @@ export default {
   height: 2.7rem;
   font-size: 1.2rem;
   background:#6495ED;
+  max-width: 16rem;
 }
 
 @media screen and (max-width: 300px){

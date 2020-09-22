@@ -243,24 +243,4 @@ export default {
     width:60vw;
   }
 }
-
-@media screen and (max-width: 1024px) and (min-width: 800px){
-  .container{
-    width:100vw;
-  }
-}
-
-@media screen and (max-width: 800) and (min-width: 600px){
-  .container{
-    width:100vw;
-    background: black;
-  }
-  .ranklist{
-    widows: 60vw;
-  }
-  .everylist{
-    width: 60vw;
-    border:solid 2px black;
-  }
-}
 </style>

@@ -23,8 +23,8 @@ public class ProjectController {
     public ResponseResult recievePic(@RequestBody String imgRecv){
         String[] data = imgRecv.split(";base64,");
         String imgBase64 = data[1].replaceAll("[\\{\\}\\[\\]\"]", "");
-        String nickname = data[0].split(",\"data64base\":data:")[0];
-        nickname = nickname.replaceAll("\"nickname:\"","");
+        String nickname = data[0].split(",\"data64base\":\"data:")[0];
+        nickname = nickname.replaceAll("\"nickname\":","").replaceAll("[\\{\\}\\[\\]\"]", "");
         IUser user = new Facedect().getInfoFromImg(imgBase64);
         EasyUser easyUser = new EasyUser();
         if(user == null){
@@ -41,7 +41,7 @@ public class ProjectController {
 
 
     @CrossOrigin
-    @RequestMapping(value = "getlist",method = RequestMethod.GET)
+    @RequestMapping(value = "/getlist",method = RequestMethod.GET)
     @ResponseBody
     public List<EasyUser> getList(){
         return imgService.getAll();

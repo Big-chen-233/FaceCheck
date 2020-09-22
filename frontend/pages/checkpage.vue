@@ -23,7 +23,7 @@
       <i class="el-icon-plus"></i>
 
     </el-upload>
-    <input type="text" class="input" v-model="name" placeholder="请输入昵称">
+    <input type="text" class="input" v-model="name" placeholder="请输入昵称" maxlength="12">
     <div class="warning">注意：只能上传jpg和png格式</div>
     <div class="warning" style="margin-top:0.5vh">且照片大小不得超过2MB</div>
     <div class="warning" style="margin-top:0.5vh">你可以不输入昵称但不会进入排行榜</div>

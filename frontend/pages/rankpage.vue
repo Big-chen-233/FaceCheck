@@ -57,7 +57,7 @@ export default {
         this.rankuser = this.users;
         this.cpmpute();
       }).catch((err)=>{
-        this.$message.error('请求失败');
+        this.$message.error('服务器未响应');
       })
     },
     cpmpute(){

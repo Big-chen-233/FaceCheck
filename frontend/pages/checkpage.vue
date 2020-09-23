@@ -136,7 +136,7 @@
             localStorage.setItem('gender',this.gender);
 
           }).catch((err) =>{
-            this.$message.error('连接失败');
+            this.$message.error('服务器未响应');
           })
         }
       },

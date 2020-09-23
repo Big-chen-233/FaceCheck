@@ -159,6 +159,7 @@
   justify-content: flex-start;
   align-items: center;
   background:#F5FFFA;
+  padding-bottom: 2vh;
 }
 
 .el{

@@ -77,7 +77,7 @@ export default {
         this.img = localStorage.getItem('mypic');
         console.log(this.img);
 
-        if(this.score >= 60){
+        if(this.score >= 45){
           this.evaluate = '恭喜你，你是一只名副其实的靓仔!';}
         else{
           this.evaluate = '差一点点就可以成为靓仔，加油!'}

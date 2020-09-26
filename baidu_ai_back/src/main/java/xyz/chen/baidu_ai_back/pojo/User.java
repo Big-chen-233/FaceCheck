@@ -18,19 +18,38 @@ public class User implements IUser{
     private String glasses;
     private String emotion;
     private String face_type;
+    private String faceToken;
+
+    public String getFaceToken() {
+        return faceToken;
+    }
 
     public String getNickname() {
         return nickname;
     }
 
+    @Override
+
+
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
 
-    public void setPropty(Integer age, Double beauty, String expression, String face_shape, String gender, String race, Integer eye_status, Integer face_probability, String glasses, String emotion, String face_type) {
+    public void setPropty(int age,
+                          double beauty,
+                          String expression,
+                          String face_shape,
+                          String gender,
+                          String race,
+                          int eye_status,
+                          int face_probability,
+                          String glasses,
+                          String emotion,
+                          String face_type,
+                          String faceToken){
         this.age = age;
-        this.beauty = beauty;
-        this.expression = expression;
+        this.beauty= beauty;
+        this.expression=expression;
         this.face_shape = face_shape;
         this.gender = gender;
         this.race = race;
@@ -39,10 +58,8 @@ public class User implements IUser{
         this.glasses = glasses;
         this.emotion = emotion;
         this.face_type = face_type;
-//        this.img_url = img_base64;
+        this.faceToken = faceToken;
     }
-
-
 
     public Integer getAge() {
         return age;

@@ -16,6 +16,15 @@ public class EasyUser implements IEasyUser{
 
     String nickname;
     Double beauty;
+    String faceToken;
+
+    public String getFaceToken() {
+        return faceToken;
+    }
+
+    public void setFaceToken(String faceToken) {
+        this.faceToken = faceToken;
+    }
 
     public EasyUser() {
     }

@@ -18,4 +18,13 @@ public class ImgService {
     public void add(EasyUser easyUser){
         userDao.save(easyUser);
     }
+
+    public boolean isExist(EasyUser easyUser) {
+        if(userDao.findByFaceToken(easyUser.getFaceToken())!=null)
+            return false;
+        return true;
+    }
+    public void deleteUser(String faceToken){
+        userDao.deleteByFaceToken(faceToken);
+    }
 }

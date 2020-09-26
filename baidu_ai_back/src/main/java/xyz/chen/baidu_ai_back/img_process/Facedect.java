@@ -44,10 +44,10 @@ public class Facedect {
             String glasses = jsonObject.getJSONObject("glasses").getString("type");
             String emotion = jsonObject.getJSONObject("emotion").getString("type");
             String face_type = jsonObject.getJSONObject("face_type").getString("type");
+            String face_token = jsonObject.getString("face_token");
             User user = new User();
-            user.setPropty(age,beauty,expression,face_shape,gender,race,eye_status,face_probability,glasses,emotion,face_type);
+            user.setPropty(age,beauty,expression,face_shape,gender,race,eye_status,face_probability,glasses,emotion,face_type,face_token);
 
-            System.out.println("face_token：" + jsonObject.getString("face_token"));
 
             return user;
 

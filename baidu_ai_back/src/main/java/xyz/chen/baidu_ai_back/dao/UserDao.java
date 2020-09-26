@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface UserDao extends JpaRepository<EasyUser,Integer>{
     List<EasyUser> findAll();
+    EasyUser findByFaceToken(String faceToken);
+    void deleteByFaceToken(String faceToken);
 }

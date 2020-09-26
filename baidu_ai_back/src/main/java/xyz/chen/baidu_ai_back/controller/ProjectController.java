@@ -33,7 +33,10 @@ public class ProjectController {
         user.setNickname(nickname);
         easyUser.setNickname(nickname);
         easyUser.setBeauty(user.getBeauty());
-        imgService.add(easyUser);
+        easyUser.setFaceToken(user.getFaceToken());
+        if(nickname.length()>0&&imgService.isExist(easyUser)) {
+            imgService.add(easyUser);
+        }
         System.out.println((User)user);
         return new ResponseResult(200, (User) user);
     }
@@ -45,6 +48,14 @@ public class ProjectController {
     @ResponseBody
     public List<EasyUser> getList(){
         return imgService.getAll();
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/delete",method = RequestMethod.GET)
+    @ResponseBody
+    public boolean deleteElement(String faceToken){
+        imgService.deleteUser(faceToken);
+        return true;
     }
 
 }
